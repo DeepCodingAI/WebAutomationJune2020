@@ -15,6 +15,7 @@ public class DropDownMenu extends CommonAPI {
         List<String> listOfString = getListOfString(elementList);
         for(String st:listOfString){
             System.out.println(st);
+            System.out.println("wait for page to load");
         }
     }
 }
