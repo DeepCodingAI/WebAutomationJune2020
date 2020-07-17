@@ -14,6 +14,7 @@ public class SearchItems extends CommonAPI {
         Thread.sleep(2000);
         System.out.println("potential conflict.....");
         System.out.println("conflict might happen soon");
+        System.out.println("no ore conflict, lets have a fresh start");
     }
 
     @Test
