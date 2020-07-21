@@ -10,7 +10,7 @@ public class SearchItems extends CommonAPI {
 
     @Test
     public void test1() throws InterruptedException{
-        typeOnElement("twotabsearchtextbox","Comic Book");
+        typeOnElement("#twotabsearchtextbox","Comic Book");
         Thread.sleep(2000);
         System.out.println("potential conflict.....");
         System.out.println("conflict might happen soon");
