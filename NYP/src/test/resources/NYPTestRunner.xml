@@ -15,7 +15,7 @@
     <test name = "NYP Home">
 
         <classes>
-            <class name=""/>
+            <class name="e2e.TestAllFeatures"/>
         </classes>
 
     </test>

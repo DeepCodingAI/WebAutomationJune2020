@@ -1,12 +1,13 @@
 package pages;
 
+import base.CommonAPI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class LandingPage {
 
-    @FindBy(how = How.CSS, using = "svg.menu-icon-svg")
+    @FindBy(how = How.CSS, using = "#sections > span.menu-icon > svg")
     public static WebElement sectionNavBarWebElement;
 
     @FindBy(how = How.CSS, using = "#page-nav .icon-email")
@@ -33,9 +34,14 @@ public class LandingPage {
     public void clickOnSearch(){
         getSearchWebElement().click();
     }
-    public void clickOnSectionMenu(){
-        getSectionNavBarWebElement().click();
+    public void clickOnSectionMenu()throws InterruptedException{
+        try {
+            getSectionNavBarWebElement().click();
+        }catch(Exception ex){
+            CommonAPI.navigateBack();
+            Thread.sleep(2000);
+            getSectionNavBarWebElement().click();
+        }
     }
-
 
 }

@@ -8,8 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.io.IOException;
@@ -25,18 +28,19 @@ public class CommonAPI {
     public String sauceLabsUserName = "";
     public String sauceLabsAccessKey = "";
 
-    public WebDriver driver = null;
+    public static WebDriver driver = null;
     @Parameters({"useCloudEnv","cloudEnvName","url","os","os_version","browserName","browserVersion"})
     @BeforeMethod
-    public void setUp(String useCloudEnv,String cloudEnvName, String url,String OS, String os_version, String browserName,
-                      String browserVersion)throws IOException {
+    public void setUp(@Optional("false")String useCloudEnv, @Optional("browserstack")String cloudEnvName, @Optional("http://amazon.com")String url,
+                      @Optional("OS x")String OS, @Optional("10") String os_version,  @Optional("Chrome")String browserName,
+                      @Optional("84") String browserVersion)throws IOException {
         if (useCloudEnv.equalsIgnoreCase("true")) {
             getCloudDriver(cloudEnvName,browserStackUserName,browserStackAccessKey,OS,os_version,browserName,browserVersion);
         } else if (useCloudEnv.equalsIgnoreCase("false")){
             getLocalDriver(OS,browserName);
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(url);
+        driver.navigate().to(url);
         driver.manage().window().maximize();
     }
 
@@ -103,5 +107,41 @@ public class CommonAPI {
         return listOfString;
     }
 
+    public void clearInputField(String locator){
+        driver.findElement(By.cssSelector(locator)).clear();
+    }
+    public static void navigateBack(){
+        driver.navigate().back();
+    }
+    //Synchronization
+    public static void waitUntilClickAble(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void waitUntilVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static void waitUntilSelectable(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        boolean element = wait.until(ExpectedConditions.elementToBeSelected(locator));
+    }
+
+    public static void waitUntilClickAble(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void waitUntilVisible(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(locator));
+    }
+
+    public static void waitUntilSelectable(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        boolean element = wait.until(ExpectedConditions.elementToBeSelected(locator));
+    }
 
 }

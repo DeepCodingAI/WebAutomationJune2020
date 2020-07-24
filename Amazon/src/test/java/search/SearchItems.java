@@ -1,20 +1,24 @@
 package search;
 
 import base.CommonAPI;
+import datasuply.DataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class SearchItems extends CommonAPI {
 
     @Test
     public void test1() throws InterruptedException{
-        typeOnElement("#twotabsearchtextbox","Comic Book");
-        Thread.sleep(2000);
-        System.out.println("potential conflict.....");
-        System.out.println("conflict might happen soon");
-        System.out.println("no ore conflict, lets have a fresh start");
+        List<String> data = DataReader.getListOfItems();
+        for(int i=0; i<data.size(); i++) {
+            typeOnElement("#twotabsearchtextbox", data.get(i));
+            Thread.sleep(2000);
+            clearInputField("#twotabsearchtextbox");
+        }
     }
 
     @Test
