@@ -13,6 +13,7 @@
         <module>Amazon</module>
         <module>AutomationPractice</module>
         <module>NYP</module>
+        <module>W3Schools</module>
     </modules>
 
     <dependencyManagement>
