@@ -6,16 +6,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import reporting.TestLogger;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class SearchItems extends CommonAPI {
-
+    DataReader dataReader = new DataReader();
     @Test
     public void readHardCodedItems() throws InterruptedException{
-        List<String> data = DataReader.getListOfItems();
+        TestLogger.log(getClass().getSimpleName() + ": " + convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
+        List<String> data = dataReader.getListOfItems();
         for(int i=0; i<data.size(); i++) {
             typeOnElement("#twotabsearchtextbox", data.get(i));
             Thread.sleep(2000);
@@ -23,8 +25,9 @@ public class SearchItems extends CommonAPI {
         }
     }
 
-    @Test
+    //@Test
     public void readDatabaseItems() throws Exception {
+        TestLogger.log(getClass().getSimpleName() + ": " + convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         List<String> data = DataReader.getItemsListFromDB();
         for(int i=0; i<data.size(); i++) {
             typeOnElement("#twotabsearchtextbox", data.get(i));

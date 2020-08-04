@@ -2,6 +2,7 @@ package datasuply;
 
 import base.CommonAPI;
 import datasources.ConnectToSqlDB;
+import reporting.TestLogger;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,7 +12,8 @@ import java.util.List;
 public class DataReader {
 
     public static ConnectToSqlDB connectToSqlDB = new ConnectToSqlDB();
-    public static List<String> getListOfItems(){
+    public List<String> getListOfItems(){
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         List<String> list = new ArrayList<String>();
         list.add("java books");
         list.add("tooth paste");

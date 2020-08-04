@@ -1,5 +1,6 @@
 package features;
 
+import base.CommonAPI;
 import datasuply.FetchTheSteps;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,7 @@ import pages.LandingPage;
 import pages.SearchPage;
 import pages.SectionsPage;
 import pages.SignUpPage;
+import reporting.TestLogger;
 
 import java.io.IOException;
 
@@ -46,6 +48,7 @@ public class AllFunctionality {
         sectionsPage.goToEntertainmentPage(driver).clickOnHeadLineNews();
     }
     public void runAllTheFeatureTest(WebDriver driver) throws InterruptedException,IOException {
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         FetchTheSteps fetchTheSteps = new FetchTheSteps();
         String [] featureSteps = fetchTheSteps.getDataFromExcelFile();
         for(int i=1; i<featureSteps.length; i++){
